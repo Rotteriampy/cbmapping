@@ -1,0 +1,450 @@
+{% extends "base.html" %}
+{% block title %}MapWiki{% endblock %}
+
+{% block content %}
+<div class="wiki-page">
+    <section class="page-header">
+        <h2>Map Wiki</h2>
+    </section>
+
+    <!-- Поиск и сброс -->
+    <div class="wiki-controls">
+        <input type="text" id="globalSearch" class="search-input" placeholder="Поиск по названию или ID...">
+        <button id="resetBtn" class="small-button">Сбросить фильтры</button>
+    </div>
+
+    <!-- Панель фильтров -->
+    <div class="filter-panel">
+        <!-- Тип ивента (только для Событий) -->
+        <div class="filter-group event-filter" style="display: none;">
+            <label class="filter-label">Тип ивента</label>
+            <div id="filterEventType" class="checkbox-dropdown">
+                <button class="dropdown-btn">— Любой —</button>
+                <div class="dropdown-content"></div>
+            </div>
+        </div>
+
+        <!-- Лидер (только для Организаций) -->
+        <div class="filter-group org-filter">
+            <label class="filter-label">Лидер</label>
+            <div id="filterLeader" class="checkbox-dropdown">
+                <button class="dropdown-btn">— Любой —</button>
+                <div class="dropdown-content"></div>
+            </div>
+        </div>
+
+        <!-- Причина закрытия (только для Организаций) -->
+        <div class="filter-group org-filter">
+            <label class="filter-label">Причина закрытия</label>
+            <div id="filterReason" class="checkbox-dropdown">
+                <button class="dropdown-btn">— Любой —</button>
+                <div class="dropdown-content"></div>
+            </div>
+        </div>
+
+        <!-- Период (для всех) -->
+        <div class="filter-group year-slider">
+            <label class="filter-label">Период</label>
+            <div class="range-slider-wrapper">
+                <div class="range-labels">
+                    <span id="yearStartVal">{{ min_year_bound }}</span>
+                    <span id="yearEndVal">{{ max_year_bound }}</span>
+                </div>
+                <div class="container">
+                    <div class="slider-track"><div class="slider-track-fill"></div></div>
+                    <input type="range" min="{{ min_year_bound }}" max="{{ max_year_bound }}" value="{{ min_year_bound }}" id="yearStart">
+                    <input type="range" min="{{ min_year_bound }}" max="{{ max_year_bound }}" value="{{ max_year_bound }}" id="yearEnd">
+                </div>
+            </div>
+        </div>
+
+        <!-- Пик участников (только для Организаций) -->
+        <div class="filter-group members-slider org-filter">
+            <label class="filter-label">Пик участников</label>
+            <div class="range-slider-wrapper">
+                <div class="range-labels">
+                    <span id="membersStartVal">0</span>
+                    <span id="membersEndVal">{{ max_members_bound }}</span>
+                </div>
+                <div class="container">
+                    <div class="slider-track"><div class="slider-track-fill"></div></div>
+                    <input type="range" min="0" max="{{ max_members_bound }}" value="0" id="minMembers">
+                    <input type="range" min="0" max="{{ max_members_bound }}" value="{{ max_members_bound }}" id="maxMembers">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Табы -->
+    <div class="wiki-tabs">
+        <button class="tab-btn active" data-tab="org">Организации</button>
+        <button class="tab-btn" data-tab="person">Личности</button>
+        <button class="tab-btn" data-tab="event">События</button>
+    </div>
+
+    <!-- Результаты -->
+    <div class="wiki-grid" id="results"></div>
+
+    <div id="noResults" class="no-results">
+        <h3>Ничего не найдено</h3>
+        <p>Попробуйте изменить фильтры или поиск</p>
+    </div>
+</div>
+
+<script>
+    window.WIKI_DATA = {
+        orgs: {{ orgs_json | tojson }},
+        persons: {{ persons_json | tojson }},
+        events: {{ events_json | tojson }}
+    };
+
+    function initRangeSlider(minId, maxId, valMinId, valMaxId) {
+        const sliderMin = document.getElementById(minId);
+        const sliderMax = document.getElementById(maxId);
+        const displayMin = document.getElementById(valMinId);
+        const displayMax = document.getElementById(valMaxId);
+        const fill = sliderMin.parentElement.querySelector(".slider-track-fill");
+
+        function update() {
+            let minVal = parseInt(sliderMin.value);
+            let maxVal = parseInt(sliderMax.value);
+
+            if (minVal > maxVal) {
+                if (document.activeElement === sliderMin) {
+                    maxVal = minVal;
+                    sliderMax.value = maxVal;
+                } else {
+                    minVal = maxVal;
+                    sliderMin.value = minVal;
+                }
+            }
+
+            displayMin.textContent = minVal;
+            displayMax.textContent = maxVal;
+
+            const range = sliderMin.max - sliderMin.min;
+            const percentMin = (minVal - sliderMin.min) / range * 100;
+            const percentMax = (maxVal - sliderMin.min) / range * 100;
+            fill.style.left = percentMin + "%";
+            fill.style.width = (percentMax - percentMin) + "%";
+        }
+
+        sliderMin.addEventListener("input", update);
+        sliderMax.addEventListener("input", update);
+        update();
+
+        return update;
+    }
+
+    const updateYearSlider = initRangeSlider("yearStart", "yearEnd", "yearStartVal", "yearEndVal");
+    const updateMembersSlider = initRangeSlider("minMembers", "maxMembers", "membersStartVal", "membersEndVal");
+
+    (function() {
+        const searchInput = document.getElementById('globalSearch');
+        const resultsEl = document.getElementById('results');
+        const noResultsEl = document.getElementById('noResults');
+        const tabBtns = Array.from(document.querySelectorAll('.tab-btn'));
+        const resetBtn = document.getElementById('resetBtn');
+        let activeTab = 'org';
+        let data = window.WIKI_DATA;
+
+        function parseDateParts(dateStr) {
+            if (!dateStr) return {year: null};
+            const match = dateStr.match(/\b(\d{4})\b/);
+            if (match) {
+                const year = parseInt(match[1], 10);
+                if (!isNaN(year)) return {year};
+            }
+            return {year: null};
+        }
+
+        function getItemDateRange(item, type) {
+            if (type === 'org') return {start: item.created || null, end: item.closed || null};
+            if (type === 'person') return {start: item.created || null, end: item.departed || null};
+            if (type === 'event') return {start: item.date || null, end: item.date || null};
+            return {start: null, end: null};
+        }
+
+        function getSelectedValues(id) {
+            return Array.from(document.querySelectorAll(`#${id} .dropdown-content input:checked`)).map(inp => inp.value);
+        }
+
+        function updateButtonText(id) {
+            const btn = document.querySelector(`#${id} .dropdown-btn`);
+            const selected = getSelectedValues(id);
+            btn.textContent = selected.length ? `Выбрано: ${selected.length}` : '— Любой —';
+        }
+
+        function collectFilterOptions() {
+            const leaders = new Set();
+            const reasons = new Set();
+            const evtypes = new Set();
+            const NOT_CLOSED_VALUE = "NOT_CLOSED";
+            const NOT_CLOSED_TEXT = "Не закрыт";
+
+            (data.orgs || []).forEach(o => {
+                if (Array.isArray(o.leader)) o.leader.forEach(l => leaders.add(l));
+                else if (o.leader) leaders.add(o.leader);
+
+                if (o.reason_for_closing) {
+                    reasons.add(o.reason_for_closing);
+                } else if (o.closed === null) {
+                    reasons.add(NOT_CLOSED_VALUE);
+                }
+            });
+
+            (data.events || []).forEach(e => {
+                const typeStr = String(e.event_type || '').trim();
+                if (typeStr) evtypes.add(typeStr);
+            });
+
+            function fill(id, set) {
+                const container = document.querySelector(`#${id} .dropdown-content`);
+                container.innerHTML = '';
+                Array.from(set).sort().forEach(v => {
+                    const label = document.createElement('label');
+                    const inp = document.createElement('input');
+                    inp.type = 'checkbox';
+                    inp.value = v;
+                    label.appendChild(inp);
+                    label.appendChild(document.createTextNode(v === NOT_CLOSED_VALUE ? NOT_CLOSED_TEXT : v));
+                    container.appendChild(label);
+                });
+            }
+
+            fill('filterLeader', leaders);
+            fill('filterReason', reasons);
+            fill('filterEventType', evtypes);
+
+            document.querySelectorAll('.dropdown-content input').forEach(inp => {
+                inp.addEventListener('change', () => {
+                    const dropdown = inp.closest('.checkbox-dropdown');
+                    updateButtonText(dropdown.id);
+                    applyFiltersAndRender();
+                });
+            });
+        }
+
+        function closeAllDropdowns() {
+            document.querySelectorAll('.dropdown-content').forEach(content => {
+                content.style.display = 'none';
+            });
+        }
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.checkbox-dropdown')) {
+                closeAllDropdowns();
+            }
+        });
+
+        document.querySelectorAll('.checkbox-dropdown .dropdown-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const content = btn.nextElementSibling;
+                if (content.style.display === 'block') {
+                    content.style.display = 'none';
+                } else {
+                    closeAllDropdowns();
+                    content.style.display = 'block';
+                }
+            });
+        });
+
+        function itemMatchesSearch(item, type, q) {
+            if (!q) return true;
+            q = q.toLowerCase();
+            const name = (item.name || '').toLowerCase();
+            if (name.includes(q)) return true;
+            if (type === 'person') {
+                const old = item.old_nicknames || '';
+                if (Array.isArray(old) && old.join(' ').toLowerCase().includes(q)) return true;
+                if (typeof old === 'string' && old.toLowerCase().includes(q)) return true;
+            }
+            if ((item.id || '').toLowerCase().includes(q)) return true;
+            return false;
+        }
+
+        function itemMatchesFilters(item, type) {
+            const q = searchInput.value.trim();
+            if (!itemMatchesSearch(item, type, q)) return false;
+
+            if (type === 'org') {
+                const selectedLeaders = getSelectedValues('filterLeader');
+                if (selectedLeaders.length) {
+                    const leaders = Array.isArray(item.leader) ? item.leader.map(String) : (item.leader ? [String(item.leader)] : []);
+                    if (!leaders.some(l => selectedLeaders.includes(l))) return false;
+                }
+
+                const selectedReasons = getSelectedValues('filterReason');
+                if (selectedReasons.length) {
+                    const itemReason = (item.closed === null && item.reason_for_closing === null) ? 'NOT_CLOSED' : String(item.reason_for_closing || '');
+                    if (!selectedReasons.includes(itemReason)) return false;
+                }
+            }
+
+            if (type === 'event') {
+                const selectedTypes = getSelectedValues('filterEventType');
+                if (selectedTypes.length && !selectedTypes.includes(String(item.event_type || ''))) return false;
+            }
+
+            const pStart = parseInt(document.getElementById('yearStart').value);
+            const pEnd = parseInt(document.getElementById('yearEnd').value);
+            const it = getItemDateRange(item, type);
+            const sY = parseDateParts(it.start).year;
+            const eY = parseDateParts(it.end).year;
+
+            if (eY !== null && eY < pStart) return false;
+            if (sY !== null && sY > pEnd) return false;
+
+            if (type === 'org') {
+                const members = item.peak_members || 0;
+                const minM = parseInt(document.getElementById('minMembers').value);
+                const maxM = parseInt(document.getElementById('maxMembers').value);
+                if (members < minM || members > maxM) return false;
+            }
+
+            return true;
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+
+        function renderList(type, list) {
+            resultsEl.innerHTML = '';
+            if (!list || list.length === 0) {
+                noResultsEl.style.display = 'block';
+                return;
+            }
+            noResultsEl.style.display = 'none';
+
+            list.forEach(item => {
+                const cardUrl = `/wiki/${encodeURIComponent(item.id)}`;
+                const card = document.createElement('div');
+                card.className = 'card clickable-card';
+                card.dataset.url = cardUrl;
+
+                const name = document.createElement('div');
+                name.className = 'card-title';
+                name.innerHTML = `<strong>${escapeHtml(item.name || item.id || '—')}</strong>`;
+                card.appendChild(name);
+
+                const metaContainer = document.createElement('div');
+                metaContainer.className = 'meta-lines';
+
+                const dr = getItemDateRange(item, type);
+                const ds = dr.start || '?';
+                const de = dr.end || 'наст. время';
+                const lines = [];
+
+                if (type === 'org') {
+                    if (item.leader) {
+                        let leadersArr = Array.isArray(item.leader) ? item.leader : [item.leader];
+                        const MAX_WORDS = 4;
+                        let leadersText = leadersArr
+                            .map(leader => {
+                                const match = String(leader).match(/\[([^\]]+)\]\([^)]+\)/);
+                                return match ? match[1] : String(leader);
+                            })
+                            .slice(0, MAX_WORDS)
+                            .join(', ');
+                        if (leadersArr.length > MAX_WORDS) leadersText += '…';
+                        lines.push(`<strong>Лидеры:</strong> ${escapeHtml(leadersText)}`);
+                    }
+                    lines.push(`<strong>Период:</strong> ${escapeHtml(String(ds))} – ${escapeHtml(String(de))}`);
+                    if (item.peak_members) lines.push(`<strong>Пик участников:</strong> ${escapeHtml(String(item.peak_members))}`);
+                    if (item.reason_for_closing) lines.push(`<strong>Причина закрытия:</strong> ${escapeHtml(item.reason_for_closing)}`);
+                } else if (type === 'person') {
+                    const dsDisplay = ds || '—';
+                    const deDisplay = de || 'наст. время';
+                    lines.push(`<strong>Время:</strong> ${escapeHtml(String(dsDisplay))} – ${escapeHtml(String(deDisplay))}`);
+                    if (item.old_nicknames) {
+                        const old = Array.isArray(item.old_nicknames) ? item.old_nicknames.join(', ') : item.old_nicknames;
+                        lines.push(`<strong>Старые ники:</strong> ${escapeHtml(old)}`);
+                    }
+                } else if (type === 'event') {
+                    if (item.event_type) lines.push(`<strong>Тип:</strong> ${escapeHtml(item.event_type)}`);
+                    lines.push(`<strong>Дата:</strong> ${escapeHtml(String(ds))}`);
+                }
+
+                lines.forEach(line => {
+                    const lineEl = document.createElement('div');
+                    lineEl.className = 'meta-line';
+                    lineEl.innerHTML = line;
+                    metaContainer.appendChild(lineEl);
+                });
+
+                card.appendChild(metaContainer);
+                resultsEl.appendChild(card);
+            });
+        }
+
+        function applyFiltersAndRender() {
+            let list = [];
+            if (activeTab === 'org') list = (data.orgs || []).filter(i => itemMatchesFilters(i, 'org'));
+            if (activeTab === 'person') list = (data.persons || []).filter(i => itemMatchesFilters(i, 'person'));
+            if (activeTab === 'event') list = (data.events || []).filter(i => itemMatchesFilters(i, 'event'));
+            renderList(activeTab, list);
+        }
+
+        function showFiltersForTab(tab) {
+            document.querySelectorAll('.filter-group').forEach(g => g.style.display = 'none');
+            document.querySelector('.year-slider').style.display = 'flex';
+            if (tab === 'org') {
+                document.querySelectorAll('.org-filter').forEach(g => g.style.display = 'flex');
+            } else if (tab === 'event') {
+                document.querySelector('.event-filter').style.display = 'flex';
+            }
+        }
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                tabBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                activeTab = btn.dataset.tab;
+                showFiltersForTab(activeTab);
+                applyFiltersAndRender();
+            });
+        });
+
+        searchInput.addEventListener('input', applyFiltersAndRender);
+        document.getElementById('yearStart').addEventListener('input', applyFiltersAndRender);
+        document.getElementById('yearEnd').addEventListener('input', applyFiltersAndRender);
+        document.getElementById('minMembers').addEventListener('input', applyFiltersAndRender);
+        document.getElementById('maxMembers').addEventListener('input', applyFiltersAndRender);
+
+        resultsEl.addEventListener('click', (e) => {
+            const card = e.target.closest('.clickable-card');
+            if (card && card.dataset.url) {
+                window.location.href = card.dataset.url;
+            }
+        });
+
+        resetBtn.addEventListener('click', () => {
+            searchInput.value = '';
+            document.querySelectorAll('.dropdown-content input').forEach(inp => inp.checked = false);
+            document.querySelectorAll('.checkbox-dropdown').forEach(dd => updateButtonText(dd.id));
+
+            document.getElementById('yearStart').value = {{ min_year_bound }};
+            document.getElementById('yearEnd').value = {{ max_year_bound }};
+            updateYearSlider();
+
+            document.getElementById('minMembers').value = 0;
+            document.getElementById('maxMembers').value = {{ max_members_bound }};
+            updateMembersSlider();
+
+            applyFiltersAndRender();
+        });
+
+        collectFilterOptions();
+        showFiltersForTab('org');
+        applyFiltersAndRender();
+    })();
+</script>
+{% endblock %}

@@ -1,0 +1,400 @@
+{
+  "info": {
+    "id": "1291840289832571033",
+    "name": "MU | ВПИ Odyssea Majoriana",
+    "member_count": 43,
+    "online_count": 14,
+    "description": "Нет описания",
+    "created_at": "04.10.2024",
+    "icon_url": "assets/1291840289832571033_icon.png",
+    "banner_url": null,
+    "owner_id": "844185894981337129",
+    "premium_tier": 0,
+    "premium_subscription_count": 0,
+    "owner": "rotarempy",
+    "features": [
+      "COMMUNITY",
+      "TIERLESS_BOOSTING_SYSTEM_MESSAGE",
+      "NEWS"
+    ],
+    "vanity_url": null
+  },
+  "history": [
+    {
+      "timestamp": 1767451750.8180435,
+      "member_count": 43,
+      "online_count": 14
+    },
+    {
+      "timestamp": 1767451750.8445537,
+      "member_count": 43,
+      "online_count": 14
+    }
+  ],
+  "members": [
+    {
+      "id": "310848622642069504",
+      "name": "JuniperBot",
+      "bot": true,
+      "status": "idle",
+      "joined_at": 1731521131.5
+    },
+    {
+      "id": "710103666614599712",
+      "name": "👱🏻♀ •  « Aryāna Femboy »",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1737273105.009
+    },
+    {
+      "id": "1078223288205062204",
+      "name": "⚡🔺Ганнибал Хенгист – англо-сакс",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1737196226.998
+    },
+    {
+      "id": "1325096654751400010",
+      "name": "𝑾𝑰𝑵𝑻𝑬𝑹",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1737223504.312
+    },
+    {
+      "id": "1210924476754034731",
+      "name": "Hanter",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1737195857.419
+    },
+    {
+      "id": "1020314033448038513",
+      "name": "Titus Livius",
+      "bot": false,
+      "status": "idle",
+      "joined_at": 1731518810.001
+    },
+    {
+      "id": "940147031379431455",
+      "name": "🦅🔸Восточная Римская Империя",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1737190982.551
+    },
+    {
+      "id": "292953664492929025",
+      "name": "UnbelievaBoat",
+      "bot": true,
+      "status": "online",
+      "joined_at": 1731514986.48
+    },
+    {
+      "id": "724741807241560114",
+      "name": "Valeska.",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1737458798.458
+    },
+    {
+      "id": "705372408281825350",
+      "name": "UFO",
+      "bot": true,
+      "status": "online",
+      "joined_at": 1731526972.945
+    },
+    {
+      "id": "868432576459706398",
+      "name": "Гай Мария Дементия",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1737044943.337
+    },
+    {
+      "id": "500658624109084682",
+      "name": "Emoji.gg",
+      "bot": true,
+      "status": "online",
+      "joined_at": 1737134901.779
+    },
+    {
+      "id": "1229161740311203890",
+      "name": "der_antichrist99",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1737457437.168
+    },
+    {
+      "id": "1323755360028463145",
+      "name": "hu8zgzug",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1738276291.199
+    },
+    {
+      "id": "1262875575459119149",
+      "name": "⚡🔸Вульфила - Готы",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1737447227.02
+    },
+    {
+      "id": "900280208098205727",
+      "name": "Maris485",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1737202198.368
+    },
+    {
+      "id": "1092516496258891816",
+      "name": "татар",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1752273398.165
+    },
+    {
+      "id": "925996638718271529",
+      "name": "ČmoniaFan",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1737204279.514
+    },
+    {
+      "id": "468281173072805889",
+      "name": "MarriageBot",
+      "bot": true,
+      "status": "offline",
+      "joined_at": 1731515739.499
+    },
+    {
+      "id": "1151945853938958446",
+      "name": "Чистокровный ариец",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1737571351.875
+    },
+    {
+      "id": "811957968006021180",
+      "name": "зови меня дадуй, себя зови нахуй",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1737199578.667
+    },
+    {
+      "id": "650728743697907714",
+      "name": "Prigozhin_pod_samoletom",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1737304431.982
+    },
+    {
+      "id": "949479338275913799",
+      "name": "Make it a Quote",
+      "bot": true,
+      "status": "online",
+      "joined_at": 1737194920.237
+    },
+    {
+      "id": "1252698718399103017",
+      "name": "Тайвин Ланнистер",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1737543439.913
+    },
+    {
+      "id": "1105112993232076910",
+      "name": "Gik",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1739105019.187
+    },
+    {
+      "id": "844185894981337129",
+      "name": "Napoleone di Buonaparte",
+      "bot": false,
+      "status": "online",
+      "joined_at": 1728069126.423
+    },
+    {
+      "id": "909091233798963240",
+      "name": "Ксенија",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1737388106.845
+    },
+    {
+      "id": "1054507026467782666",
+      "name": "Lumen Entis",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1737195316.69
+    },
+    {
+      "id": "681406316178309151",
+      "name": "talkh",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1737196035.364
+    },
+    {
+      "id": "765928787074351115",
+      "name": "Dickтатор",
+      "bot": false,
+      "status": "idle",
+      "joined_at": 1737475830.718
+    },
+    {
+      "id": "806980920544460831",
+      "name": "Ace-Attorney-Court-Bot",
+      "bot": true,
+      "status": "offline",
+      "joined_at": 1737194894.173
+    },
+    {
+      "id": "1436689286920671284",
+      "name": "MapStats",
+      "bot": true,
+      "status": "online",
+      "joined_at": 1763316872.935
+    },
+    {
+      "id": "491769129318088714",
+      "name": "Statbot",
+      "bot": true,
+      "status": "online",
+      "joined_at": 1737185695.524
+    },
+    {
+      "id": "859730782306566174",
+      "name": "AizerHelper",
+      "bot": true,
+      "status": "online",
+      "joined_at": 1737194961.583
+    },
+    {
+      "id": "808660286688985098",
+      "name": "татар",
+      "bot": false,
+      "status": "dnd",
+      "joined_at": 1737193646.501
+    },
+    {
+      "id": "757993134339784854",
+      "name": "lucius607",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1737456906.634
+    },
+    {
+      "id": "989194786206515240",
+      "name": "Zaglyt",
+      "bot": true,
+      "status": "online",
+      "joined_at": 1737195479.817
+    },
+    {
+      "id": "1289390836089487487",
+      "name": "𝐠𝐫𝐞𝐞𝐧𝐥𝐢𝐳𝐚𝐫𝐝",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1737572246.713
+    },
+    {
+      "id": "1136033684718374954",
+      "name": "𝕱𝖎𝖓-𝕯𝖊𝖙𝖊𝖈𝖙𝖎𝖛",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1737883695.54
+    },
+    {
+      "id": "412347780841865216",
+      "name": "Jockie Music (3)",
+      "bot": true,
+      "status": "online",
+      "joined_at": 1737379105.09
+    },
+    {
+      "id": "1246343661567086664",
+      "name": "𝐕𝐚𝐥𝐢𝐚𝐧𝐭 𝐖𝐚𝐫𝐫𝐢𝐨𝐫",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1737195743.168
+    },
+    {
+      "id": "1139517163955294308",
+      "name": "НЕГРЫ ВСЕ ПИДО",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1737702104.426
+    },
+    {
+      "id": "1039947435188965416",
+      "name": "⚡🔻Теодорих Великий - Отсготия",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1731590532.156
+    }
+  ],
+  "member_overlaps": {
+    "1001565031193923624": {
+      "server_name": "🌾 | Duchy of Fieldmap",
+      "common_count": 1,
+      "common_member_ids": [
+        "1039947435188965416"
+      ]
+    },
+    "1062358612468580424": {
+      "server_name": "📚 Всемапперская библиотека 📚",
+      "common_count": 2,
+      "common_member_ids": [
+        "909091233798963240",
+        "844185894981337129"
+      ]
+    },
+    "1188381978110734386": {
+      "server_name": "Union Kartogrum",
+      "common_count": 3,
+      "common_member_ids": [
+        "1020314033448038513",
+        "1039947435188965416",
+        "844185894981337129"
+      ]
+    },
+    "1219365329852170390": {
+      "server_name": "𝙻𝙵 | 𝙇𝙖𝙘𝙩𝙖𝙫𝙞𝙖𝙣 𝙁𝙚𝙙𝙚𝙧𝙖𝙩𝙞𝙤𝙣",
+      "common_count": 1,
+      "common_member_ids": [
+        "1039947435188965416"
+      ]
+    },
+    "1263547717326606479": {
+      "server_name": "DEGRAMAP | Готовимся к Зиме!",
+      "common_count": 4,
+      "common_member_ids": [
+        "868432576459706398",
+        "909091233798963240",
+        "1020314033448038513",
+        "1039947435188965416"
+      ]
+    },
+    "1272874009385631766": {
+      "server_name": "🇷🇺 MAP | cbmapping.ru",
+      "common_count": 7,
+      "common_member_ids": [
+        "1262875575459119149",
+        "844185894981337129",
+        "868432576459706398",
+        "1020314033448038513",
+        "811957968006021180",
+        "1139517163955294308",
+        "1039947435188965416"
+      ]
+    },
+    "1291834138311131136": {
+      "server_name": "Сервер для крутых mапперов",
+      "common_count": 1,
+      "common_member_ids": [
+        "710103666614599712"
+      ]
+    }
+  }
+}

@@ -1,0 +1,17 @@
+[
+  {
+    "title": "Глаза болла",
+    "type": "image",
+    "source": "1.png"
+  },
+    {
+    "title": "Тени болла",
+    "type": "image",
+    "source": "2.png"
+  },
+  {
+    "title": "Как делать маппинг",
+    "type": "youtube",
+    "source": "https://www.youtube.com/watch?v=_sHsm4gqttY"
+  }
+]

@@ -1,0 +1,466 @@
+{
+  "info": {
+    "id": "1130436696626958417",
+    "name": "⭐CountryBalls Mapping Community [МУЗЕЙ]⭐",
+    "member_count": 47,
+    "online_count": 15,
+    "description": "Нет описания",
+    "created_at": "17.07.2023",
+    "icon_url": "assets/1130436696626958417_icon.png",
+    "banner_url": null,
+    "owner_id": "1011784486276583444",
+    "premium_tier": 0,
+    "premium_subscription_count": 0,
+    "owner": "lviv_ball",
+    "features": [
+      "COMMUNITY",
+      "NEWS",
+      "CHANNEL_ICON_EMOJIS_GENERATED"
+    ],
+    "vanity_url": null
+  },
+  "history": [
+    {
+      "timestamp": 1767451750.803538,
+      "member_count": 47,
+      "online_count": 15
+    },
+    {
+      "timestamp": 1767451750.8275506,
+      "member_count": 47,
+      "online_count": 15
+    }
+  ],
+  "members": [
+    {
+      "id": "1020270605687324683",
+      "name": "Dark Mapper",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1692603992.261
+    },
+    {
+      "id": "310848622642069504",
+      "name": "JuniperBot",
+      "bot": true,
+      "status": "idle",
+      "joined_at": 1689593787.399
+    },
+    {
+      "id": "159985870458322944",
+      "name": "MEE6",
+      "bot": true,
+      "status": "online",
+      "joined_at": 1689594371.894
+    },
+    {
+      "id": "999736048596816014",
+      "name": "Ballsdex",
+      "bot": true,
+      "status": "online",
+      "joined_at": 1689593750.091
+    },
+    {
+      "id": "270904126974590976",
+      "name": "Dank Memer",
+      "bot": true,
+      "status": "online",
+      "joined_at": 1689593821.319
+    },
+    {
+      "id": "1040984818256707725",
+      "name": "Данила Спартак",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1692455136.164
+    },
+    {
+      "id": "235148962103951360",
+      "name": "Carl-bot",
+      "bot": true,
+      "status": "online",
+      "joined_at": 1689594299.614
+    },
+    {
+      "id": "1004289616318316594",
+      "name": "Архонт",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1727736575.84
+    },
+    {
+      "id": "184405311681986560",
+      "name": "FredBoat♪♪",
+      "bot": true,
+      "status": "online",
+      "joined_at": 1689594731.259
+    },
+    {
+      "id": "547092289864859648",
+      "name": "| мудрая китичка",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1692489524.613
+    },
+    {
+      "id": "958655045698736158",
+      "name": "AR-Protect",
+      "bot": true,
+      "status": "offline",
+      "joined_at": 1689594409.004
+    },
+    {
+      "id": "557628352828014614",
+      "name": "Ticket Tool",
+      "bot": true,
+      "status": "online",
+      "joined_at": 1689593701.24
+    },
+    {
+      "id": "665614744295833606",
+      "name": "Rusa",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1692516783.709
+    },
+    {
+      "id": "988670247903043634",
+      "name": "𝓘𝓶𝓶𝓸𝓻𝓽𝓪𝓵 𝓖𝓻𝓸𝓼𝓼𝓮",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1692369339.404
+    },
+    {
+      "id": "1049413890276077690",
+      "name": "BlueWillow",
+      "bot": true,
+      "status": "offline",
+      "joined_at": 1689594523.11
+    },
+    {
+      "id": "292953664492929025",
+      "name": "UnbelievaBoat",
+      "bot": true,
+      "status": "online",
+      "joined_at": 1689594044.524
+    },
+    {
+      "id": "1115940614207451176",
+      "name": "Exterreris",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1692453750.325
+    },
+    {
+      "id": "541249368057970699",
+      "name": "Zont",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1693249207.066
+    },
+    {
+      "id": "759661542080774165",
+      "name": "dyh8zb2kx5ns",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1698004498.453
+    },
+    {
+      "id": "1082272719053258843",
+      "name": "hhertzen",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1723586185.757
+    },
+    {
+      "id": "1269938484047777832",
+      "name": "Dyno",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1732716432.844
+    },
+    {
+      "id": "1011784486276583444",
+      "name": "Lv1v ball",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1689587511.019
+    },
+    {
+      "id": "955371409507516486",
+      "name": "burgund/mckalash",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1693019669.022
+    },
+    {
+      "id": "1038022706827886602",
+      "name": "Юрский",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1693646640.712
+    },
+    {
+      "id": "458276816071950337",
+      "name": "ServerStats",
+      "bot": true,
+      "status": "online",
+      "joined_at": 1689593925.085
+    },
+    {
+      "id": "1040445086409953290",
+      "name": "anonim",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1692784296.53
+    },
+    {
+      "id": "1142140741758492763",
+      "name": "Лисицка",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1692435891.341
+    },
+    {
+      "id": "1256559443949387787",
+      "name": "Rzv",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1727535450.2
+    },
+    {
+      "id": "622454467891298315",
+      "name": "Арагон",
+      "bot": false,
+      "status": "dnd",
+      "joined_at": 1696938948.979
+    },
+    {
+      "id": "1091362459639615541",
+      "name": "targo",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1728188066.917
+    },
+    {
+      "id": "961672475027054702",
+      "name": "Polski Pszek",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1694616518.13
+    },
+    {
+      "id": "903352268169023548",
+      "name": "ВНМ",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1692453184.66
+    },
+    {
+      "id": "973720179928358993",
+      "name": "Лисицка",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1689813741.113
+    },
+    {
+      "id": "1436689286920671284",
+      "name": "MapStats",
+      "bot": true,
+      "status": "online",
+      "joined_at": 1762641804.628
+    },
+    {
+      "id": "491769129318088714",
+      "name": "Statbot",
+      "bot": true,
+      "status": "online",
+      "joined_at": 1689594018.505
+    },
+    {
+      "id": "974297735559806986",
+      "name": "GenAi",
+      "bot": true,
+      "status": "online",
+      "joined_at": 1689594589.577
+    },
+    {
+      "id": "1288352161364840478",
+      "name": "DC.com",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1743815037.629
+    },
+    {
+      "id": "1102064898692890666",
+      "name": "ае54ам5кап",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1694964478.284
+    },
+    {
+      "id": "855712125729374240",
+      "name": "สับปะรด",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1692439228.383
+    },
+    {
+      "id": "282859044593598464",
+      "name": "ProBot ✨",
+      "bot": true,
+      "status": "online",
+      "joined_at": 1689593878.005
+    },
+    {
+      "id": "1268995371217059842",
+      "name": "Lno",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1723402685.057
+    },
+    {
+      "id": "1286581527152562210",
+      "name": "о'ларбек",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1738927643.356
+    },
+    {
+      "id": "356065937318871041",
+      "name": "Aki",
+      "bot": true,
+      "status": "offline",
+      "joined_at": 1689594253.349
+    },
+    {
+      "id": "1271056932324638740",
+      "name": "Qwerty",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1726181886.128
+    },
+    {
+      "id": "1069233251866124389",
+      "name": "ящер кондуктор",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1692436158.398
+    },
+    {
+      "id": "416358583220043796",
+      "name": "Xenon",
+      "bot": true,
+      "status": "online",
+      "joined_at": 1689594230.586
+    },
+    {
+      "id": "727571068646326412",
+      "name": "SunLight",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1689623553.334
+    }
+  ],
+  "member_overlaps": {
+    "1001565031193923624": {
+      "server_name": "🌾 | Duchy of Fieldmap",
+      "common_count": 4,
+      "common_member_ids": [
+        "1269938484047777832",
+        "665614744295833606",
+        "1115940614207451176",
+        "1268995371217059842"
+      ]
+    },
+    "1062358612468580424": {
+      "server_name": "📚 Всемапперская библиотека 📚",
+      "common_count": 10,
+      "common_member_ids": [
+        "1040445086409953290",
+        "961672475027054702",
+        "622454467891298315",
+        "1269938484047777832",
+        "547092289864859648",
+        "1091362459639615541",
+        "1038022706827886602",
+        "1020270605687324683",
+        "541249368057970699",
+        "1004289616318316594"
+      ]
+    },
+    "1119578507287220324": {
+      "server_name": "Сервер Московита 19/84",
+      "common_count": 3,
+      "common_member_ids": [
+        "1004289616318316594",
+        "541249368057970699",
+        "973720179928358993"
+      ]
+    },
+    "1188381978110734386": {
+      "server_name": "Union Kartogrum",
+      "common_count": 10,
+      "common_member_ids": [
+        "1269938484047777832",
+        "547092289864859648",
+        "1069233251866124389",
+        "1115940614207451176",
+        "1020270605687324683",
+        "1011784486276583444",
+        "541249368057970699",
+        "1288352161364840478",
+        "1142140741758492763",
+        "1268995371217059842"
+      ]
+    },
+    "1219365329852170390": {
+      "server_name": "𝙻𝙵 | 𝙇𝙖𝙘𝙩𝙖𝙫𝙞𝙖𝙣 𝙁𝙚𝙙𝙚𝙧𝙖𝙩𝙞𝙤𝙣",
+      "common_count": 6,
+      "common_member_ids": [
+        "1269938484047777832",
+        "1011784486276583444",
+        "1256559443949387787",
+        "1288352161364840478",
+        "1142140741758492763",
+        "1268995371217059842"
+      ]
+    },
+    "1263547717326606479": {
+      "server_name": "DEGRAMAP | Готовимся к Зиме!",
+      "common_count": 10,
+      "common_member_ids": [
+        "1082272719053258843",
+        "622454467891298315",
+        "1115940614207451176",
+        "1040984818256707725",
+        "1011784486276583444",
+        "1271056932324638740",
+        "1004289616318316594",
+        "759661542080774165",
+        "1288352161364840478",
+        "1268995371217059842"
+      ]
+    },
+    "1272874009385631766": {
+      "server_name": "🇷🇺 MAP | cbmapping.ru",
+      "common_count": 7,
+      "common_member_ids": [
+        "1040445086409953290",
+        "903352268169023548",
+        "1004289616318316594",
+        "759661542080774165",
+        "988670247903043634",
+        "1142140741758492763",
+        "1268995371217059842"
+      ]
+    },
+    "1291834138311131136": {
+      "server_name": "Сервер для крутых mапперов",
+      "common_count": 1,
+      "common_member_ids": [
+        "1011784486276583444"
+      ]
+    }
+  }
+}

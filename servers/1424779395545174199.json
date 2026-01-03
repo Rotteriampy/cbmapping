@@ -1,0 +1,212 @@
+{
+  "info": {
+    "id": "1424779395545174199",
+    "name": "TackerMap",
+    "member_count": 17,
+    "online_count": 6,
+    "description": "Нет описания",
+    "created_at": "06.10.2025",
+    "icon_url": "assets/1424779395545174199_icon.png",
+    "banner_url": null,
+    "owner_id": "1238793139809161339",
+    "premium_tier": 0,
+    "premium_subscription_count": 0,
+    "owner": "tacker_ru",
+    "features": [],
+    "vanity_url": null
+  },
+  "history": [
+    {
+      "timestamp": 1767451750.8190463,
+      "member_count": 17,
+      "online_count": 6
+    },
+    {
+      "timestamp": 1767451750.8455534,
+      "member_count": 17,
+      "online_count": 6
+    }
+  ],
+  "members": [
+    {
+      "id": "282859044593598464",
+      "name": "ProBot ✨",
+      "bot": true,
+      "status": "online",
+      "joined_at": 1761049962.016
+    },
+    {
+      "id": "491769129318088714",
+      "name": "Statbot",
+      "bot": true,
+      "status": "online",
+      "joined_at": 1761416790.363
+    },
+    {
+      "id": "735618881024163943",
+      "name": "Nap O'Leon",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1761346387.448
+    },
+    {
+      "id": "935401267650514954",
+      "name": "IUnknownI",
+      "bot": false,
+      "status": "idle",
+      "joined_at": 1761909916.126
+    },
+    {
+      "id": "949479338275913799",
+      "name": "Make it a Quote",
+      "bot": true,
+      "status": "online",
+      "joined_at": 1761820572.058
+    },
+    {
+      "id": "1053584789652910110",
+      "name": "Посполит",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1761462788.146
+    },
+    {
+      "id": "1070203110095589507",
+      "name": "Ataman",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1762097887.897
+    },
+    {
+      "id": "1114483751121068114",
+      "name": "KoF1337",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1761059256.378
+    },
+    {
+      "id": "1120320272189358200",
+      "name": "gemerel",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1766914616.051
+    },
+    {
+      "id": "1167857156108853250",
+      "name": "Шлепа",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1765864871.163
+    },
+    {
+      "id": "1214312661400035329",
+      "name": "Emerald",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1761481279.748
+    },
+    {
+      "id": "1238793139809161339",
+      "name": "Такер",
+      "bot": false,
+      "status": "online",
+      "joined_at": 1759764279.111
+    },
+    {
+      "id": "1250838787622436967",
+      "name": "Kukareku",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1761415492.555
+    },
+    {
+      "id": "1256968609532743823",
+      "name": "хмао",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1765011442.188
+    },
+    {
+      "id": "1381729520888975363",
+      "name": "Gera",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1761516966.808
+    },
+    {
+      "id": "1383500700687794176",
+      "name": "MapStatistic",
+      "bot": true,
+      "status": "offline",
+      "joined_at": 1759842557.732
+    },
+    {
+      "id": "1436689286920671284",
+      "name": "MapStats",
+      "bot": true,
+      "status": "online",
+      "joined_at": 1763219609.728
+    }
+  ],
+  "member_overlaps": {
+    "1001565031193923624": {
+      "server_name": "🌾 | Duchy of Fieldmap",
+      "common_count": 1,
+      "common_member_ids": [
+        "1214312661400035329"
+      ]
+    },
+    "1119578507287220324": {
+      "server_name": "Сервер Московита 19/84",
+      "common_count": 1,
+      "common_member_ids": [
+        "1070203110095589507"
+      ]
+    },
+    "1219365329852170390": {
+      "server_name": "𝙻𝙵 | 𝙇𝙖𝙘𝙩𝙖𝙫𝙞𝙖𝙣 𝙁𝙚𝙙𝙚𝙧𝙖𝙩𝙞𝙤𝙣",
+      "common_count": 6,
+      "common_member_ids": [
+        "1381729520888975363",
+        "1120320272189358200",
+        "1070203110095589507",
+        "1256968609532743823",
+        "735618881024163943",
+        "1238793139809161339"
+      ]
+    },
+    "1263547717326606479": {
+      "server_name": "DEGRAMAP | Готовимся к Зиме!",
+      "common_count": 6,
+      "common_member_ids": [
+        "1381729520888975363",
+        "1120320272189358200",
+        "1070203110095589507",
+        "1256968609532743823",
+        "735618881024163943",
+        "935401267650514954"
+      ]
+    },
+    "1272874009385631766": {
+      "server_name": "🇷🇺 MAP | cbmapping.ru",
+      "common_count": 6,
+      "common_member_ids": [
+        "1381729520888975363",
+        "1120320272189358200",
+        "1070203110095589507",
+        "735618881024163943",
+        "1114483751121068114",
+        "1238793139809161339"
+      ]
+    },
+    "1291834138311131136": {
+      "server_name": "Сервер для крутых mапперов",
+      "common_count": 3,
+      "common_member_ids": [
+        "1381729520888975363",
+        "1250838787622436967",
+        "1070203110095589507"
+      ]
+    }
+  }
+}

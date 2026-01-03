@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редактор - {{ filename.replace('.json', '') }}</title>
+    <link rel="stylesheet" href="/admin_static/admin_panel.css">
+    <link rel="icon" href="/icons/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <div class="editor-container">
+        <div class="editor-wrapper">
+            <!-- Боковая панель -->
+            <aside class="editor-sidebar">
+                <div class="sidebar-header">
+                    <h3>📂 {{ filename.replace('.json', '') }}</h3>
+                </div>
+                
+                <div class="sidebar-actions">
+                    <a href="/admin/edit/{{ page }}/{{ filename }}/new" class="btn btn-success btn-block">
+                        ➕ Добавить новую запись
+                    </a>
+                </div>
+
+                <div class="sidebar-list">
+                    <ul class="items-list">
+                        {% for item_idx, item in enumerate(data) %}
+                            <li>
+                                <a 
+                                    href="/admin/edit/{{ page }}/{{ filename }}?id={{ item_idx }}"
+                                    class="list-item {% if item_idx == idx %}active{% endif %}"
+                                >
+                                    {{ item.get('name') or item.get('title') or item.get('id') or 'Без имени' }}
+                                </a>
+                            </li>
+                        {% else %}
+                            <li class="empty-state">Список пуст</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div class="sidebar-footer">
+                    <a href="/admin" class="btn btn-secondary btn-block">
+                        ← Назад в разделы
+                    </a>
+                </div>
+            </aside>
+
+            <!-- Основная область редактирования -->
+            <main class="editor-main">
+                <div class="editor-header">
+                    <h2>✍️ {% if idx == -1 or idx is none %}Добавление новой записи{% else %}Редактирование:  {{ item.get('name') or item.get('title') or item.get('id') or 'Без имени' }}{% endif %}</h2>
+                    <div class="editor-meta">
+                        <span class="meta-item">Файл: {{ filename }}</span>
+                        {% if idx != -1 and idx is not none %}
+                            <span class="meta-item">ID записи: {{ item.get('id') or idx }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert {% if category == 'success' %}alert-success{% else %}alert-error{% endif %}">
+                                <p>{{ message }}</p>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+                <form method="POST" class="editor-form" action="/admin/edit/{{ page }}/{{ filename }}{% if idx != -1 %}?id={{ idx }}{% endif %}">
+                    <input type="hidden" name="index" value="{{ idx if idx is not none else -1 }}">
+
+                    <!-- Общие поля -->
+                    <div class="form-section">
+                        <h3>Основная информация</h3>
+
+                        {% if page == 'guides' %}
+                            <!-- ГАЙДЫ -->
+                            <div class="form-group">
+                                <label for="title">Название гайда:</label>
+                                <input type="text" id="title" name="title" value="{{ item.get('title', '') }}" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="source">Источник (ссылка YouTube или путь к файлу):</label>
+                                <input type="text" id="source" name="source" value="{{ item.get('source', '') }}" 
+                                    placeholder="https://www.youtube.com/watch?v=...  или /static/img/guides/guide.jpg" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="type">Тип контента:</label>
+                                <select id="type" name="type" required>
+                                    <option value="image" {% if item.get('type') == 'image' %}selected{% endif %}>Изображение</option>
+                                    <option value="youtube" {% if item.get('type') == 'youtube' %}selected{% endif %}>YouTube видео</option>
+                                </select>
+                            </div>
+
+                        {% elif page == 'materials' %}
+                            <!-- МАТЕРИАЛЫ -->
+                            <div class="form-group">
+                                <label for="title">Название материала:</label>
+                                <input type="text" id="title" name="title" value="{{ item.get('title', '') }}" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="image">Имя файла изображения:</label>
+                                <input type="text" id="image" name="image" value="{{ item.get('image', '') }}" 
+                                    placeholder="image.jpg (файл должен быть в static/img/materials/)" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="tag">Категория:</label>
+                                <input type="text" id="tag" name="tag" value="{{ item.get('tag', '') }}" 
+                                    placeholder="Например: Вооружение, Здания и т.д." required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="description">Описание:</label>
+                                <textarea id="description" name="description" rows="6" 
+                                        placeholder="Дополнительная информация о материале">{{ item.get('description', '') }}</textarea>
+                            </div>
+
+                        {% else %}
+                            <!-- Организации, личности, события -->
+                            {% if 'organizations' in filename %}
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="created">Создано:</label>
+                                        <input type="text" id="created" name="created" value="{{ item.get('created','') }}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="closed">Закрыто:</label>
+                                        <input type="text" id="closed" name="closed" value="{{ item.get('closed','') }}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="reason">Причина закрытия:</label>
+                                    <input type="text" id="reason" name="reason_for_closing" value="{{ item.get('reason_for_closing','') }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="peak">Пик участников:</label>
+                                    <input type="number" id="peak" name="peak_members" value="{{ item.get('peak_members','') }}" min="0">
+                                </div>
+                                <div class="form-group">
+                                    <label for="leader">Лидеры:</label>
+                                    <textarea id="leader" name="leader" rows="5">{% if item.get('leader') %}{% if item.get('leader') is string %}{{ item.get('leader') }}{% else %}{{ '\n'.join(item.get('leader', [])) }}{% endif %}{% endif %}</textarea>
+                                </div>
+                            {% elif 'personalities' in filename %}
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="created">Пришёл:</label>
+                                        <input type="text" id="created" name="created" value="{{ item.get('created','') }}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="departed">Ушёл:</label>
+                                        <input type="text" id="departed" name="departed" value="{{ item.get('departed','') }}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="oldnicks">Старые ники:</label>
+                                    <input type="text" id="oldnicks" name="old_nicknames" value="{{ item.get('old_nicknames','') }}">
+                                </div>
+                            {% elif 'events' in filename %}
+                                <div class="form-group">
+                                    <label for="type">Тип события:</label>
+                                    <input type="text" id="type" name="event_type" value="{{ item.get('event_type','') }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="date">Дата (период):</label>
+                                    <input type="text" id="date" name="date" value="{{ item.get('date','') }}">
+                                </div>
+                            {% endif %}
+                            <div class="form-group">
+                                <label for="description">Описание (Markdown):</label>
+                                <textarea id="description" name="description" rows="10">{{ item.get('description','') }}</textarea>
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Кнопки действия -->
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-success btn-lg">💾 Сохранить изменения</button>
+                        <a href="/admin/edit/{{ page }}/{{ filename }}" class="btn btn-secondary">← Отменить</a>
+                    </div>
+                </form>
+
+                <!-- Удаление -->
+                {% if idx != -1 and idx is not none %}
+                <div class="delete-section">
+                    <h3>⚠️ Опасная зона</h3>
+                    <form method="POST" action="/admin/delete/{{ page }}/{{ filename }}" onsubmit="return confirm('Вы уверены? Действие необратимо!');">
+                        <input type="hidden" name="index" value="{{ idx }}">
+                        <button type="submit" class="btn btn-danger btn-lg">🗑️ Удалить запись</button>
+                    </form>
+                </div>
+                {% endif %}
+            </main>
+        </div>
+    </div>
+
+    <script>
+        const form = document.querySelector('.editor-form');
+        let formChanged = false;
+        form.addEventListener('change', () => formChanged = true);
+        form.addEventListener('submit', () => formChanged = false);
+        window.addEventListener('beforeunload', (e) => {
+            if(formChanged) {
+                e.preventDefault();
+                e.returnValue = 'У вас есть несохраненные изменения!';
+            }
+        });
+    </script>
+</body>
+</html>

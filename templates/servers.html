@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+{% block title %}MapStats — Сервера{% endblock %}
+
+{% block content %}
+<div class="servers-page">
+    <div class="page-header">
+        <h2>Map Stats</h2>
+    </div>
+
+    <div class="search-filter">
+        <input type="text" id="searchInput" class="search-input" placeholder="Поиск по названию...">
+        <select id="sortSelect" class="filter-select">
+            <option value="name">По имени</option>
+            <option value="members">По участникам</option>
+            <option value="online">По онлайн</option>
+            <option value="boosts">По бустам</option>
+        </select>
+    </div>
+
+    <div class="servers-grid" id="serversGrid">
+        {% for guild_id, data in servers %}
+        {% set info = data.info %}
+        {% set icon_url = info.icon_url %}
+        {% set premium_count = info.premium_subscription_count|default(0) %}
+        <div class="server-card clickable-card"
+            data-name="{{ info.name|lower|default('unknown') }}"
+            data-members="{{ info.member_count|default(0) }}"
+            data-online="{{ info.online_count|default(0) }}"
+            data-boosts="{{ premium_count }}"
+            onclick="window.location.href='/server/{{ guild_id }}'">
+            
+            {% if icon_url %}
+            <img src="/servers/{{ icon_url }}" alt="Icon" class="server-icon">
+            {% endif %}
+            
+            <div class="server-info">
+                <h2 class="server-name">{{ info.name|default('Unknown')|safe }}</h2>
+                
+                <div class="server-stats">
+                    <div class="stat">
+                        <div class="stat-number">{{ info.member_count|default(0) }}</div>
+                        <div class="stat-label">Участников</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">{{ info.online_count|default(0) }}</div>
+                        <div class="stat-label">Онлайн</div>
+                    </div>
+                    {% if premium_count > 0 %}
+                    <div class="stat">
+                        <div class="stat-number">🚀 {{ premium_count }}</div>
+                        <div class="stat-label">Бустов</div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div id="noResults" class="no-results">
+        <h3>Ничего не найдено</h3>
+        <p>Попробуйте изменить запрос или сортировку</p>
+    </div>
+</div>
+
+<script>
+    const searchInput = document.getElementById('searchInput');
+    const sortSelect = document.getElementById('sortSelect');
+    const serversGrid = document.getElementById('serversGrid');
+    const noResults = document.getElementById('noResults');
+    const serverCards = Array.from(document.querySelectorAll('.server-card'));
+
+    function escapeRegExp(string) {
+        return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+
+    function highlightText(text, query) {
+        if (!query.trim()) return text;
+        const regex = new RegExp(`(${escapeRegExp(query)})`, 'gi');
+        return text.replace(regex, '<mark>$1</mark>');
+    }
+
+    function filterAndSort() {
+        const searchTerm = searchInput.value.trim();
+        const sortBy = sortSelect.value;
+
+        let filtered = serverCards.filter(card => {
+            const name = card.querySelector('.server-name').textContent || '';
+            const id = card.getAttribute('onclick').match(/\/server\/(\d+)/)?.[1] || '';
+
+            // Поиск по названию ИЛИ по ID
+            return name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                   id.includes(searchTerm);
+        });
+
+        // Сортировка
+        filtered.sort((a, b) => {
+            const aName = a.querySelector('.server-name').textContent.toLowerCase();
+            const bName = b.querySelector('.server-name').textContent.toLowerCase();
+            const aMembers = parseInt(a.dataset.members) || 0;
+            const bMembers = parseInt(b.dataset.members) || 0;
+            const aOnline = parseInt(a.dataset.online) || 0;
+            const bOnline = parseInt(b.dataset.online) || 0;
+            const aBoosts = parseInt(a.dataset.boosts) || 0;
+            const bBoosts = parseInt(b.dataset.boosts) || 0;
+
+            if (sortBy === 'name') return aName.localeCompare(bName);
+            if (sortBy === 'members') return bMembers - aMembers;
+            if (sortBy === 'online') return bOnline - aOnline;
+            if (sortBy === 'boosts') return bBoosts - aBoosts;
+            return 0;
+        });
+
+        // Очищаем и добавляем карточки с подсветкой
+        serversGrid.innerHTML = '';
+        if (filtered.length === 0) {
+            serversGrid.style.display = 'none';
+            noResults.style.display = 'block';
+        } else {
+            serversGrid.style.display = 'grid';
+            noResults.style.display = 'none';
+
+            filtered.forEach(card => {
+                // Клонируем карточку, чтобы подсветить текст
+                const clone = card.cloneNode(true);
+                const nameEl = clone.querySelector('.server-name');
+                nameEl.innerHTML = highlightText(nameEl.textContent, searchTerm);
+                serversGrid.appendChild(clone);
+            });
+        }
+    }
+
+    // События
+    searchInput.addEventListener('input', filterAndSort);
+    sortSelect.addEventListener('change', filterAndSort);
+
+    // Инициализация
+    filterAndSort();
+</script>
+{% endblock %}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ-панель</title>
+    <link rel="stylesheet" href="/admin_static/admin_panel.css">
+    <link rel="icon" href="/icons/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <div class="admin-container">
+        <div class="admin-header">
+            <h1>⚙️ Админ-панель управления</h1>
+            <div class="admin-nav">
+                <a href="/" class="btn btn-secondary">← На главную</a>
+                <a href="/admin/logout" class="btn btn-danger">Выход</a>
+            </div>
+        </div>
+
+        <div class="admin-content">
+            <div class="sections-grid">
+                <div class="section-card">
+                    <div class="section-icon">🏢</div>
+                    <h2>Организации</h2>
+                    <p>Управление организациями и группами</p>
+                    <a href="/admin/edit/organizations.json" class="btn btn-primary">Редактировать</a>
+                </div>
+
+                <div class="section-card">
+                    <div class="section-icon">👤</div>
+                    <h2>Личности</h2>
+                    <p>Управление членами комьюнити и лидерами</p>
+                    <a href="/admin/edit/personalities.json" class="btn btn-primary">Редактировать</a>
+                </div>
+
+                <div class="section-card">
+                    <div class="section-icon">📅</div>
+                    <h2>События</h2>
+                    <p>Управление событиями и важными датами</p>
+                    <a href="/admin/edit/events.json" class="btn btn-primary">Редактировать</a>
+                </div>
+
+                <!-- Блоки Материалы и Гайды удалены -->
+            </div>
+
+            <div class="quick-info">
+                <h3>ℹ️ Информация</h3>
+                <ul>
+                    <li>Все изменения сохраняются автоматически</li>
+                    <li>Данные хранятся в JSON-файлах</li>
+                    <li>При выходе сессия закроется</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

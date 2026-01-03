@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}Гайды{% endblock %}
+
+{% block content %}
+<div class="guides-page">
+    <div class="page-header">
+        <h2>Туториалы</h2>
+    </div>
+
+    <div class="search-filter">
+        <input type="text" id="searchInput" class="search-input" placeholder="🔍 Поиск по названию гайда...">
+    </div>
+
+    <div class="guides-grid" id="guidesGrid">
+        {% for guide in guides %}
+        <a href="{{ guide.link }}" target="_blank" class="guide-card clickable-card">
+            <img src="{{ guide.preview_url }}" alt="{{ guide.title }}" class="guide-preview">
+            <div class="guide-info">
+                <h2 class="guide-title">{{ guide.title }}</h2>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+
+    <div id="noResults" class="no-results">
+        <h3>Ничего не найдено</h3>
+        <p>Попробуйте изменить запрос</p>
+    </div>
+</div>
+
+<script>
+    const searchInput = document.getElementById('searchInput');
+    const guidesGrid = document.getElementById('guidesGrid');
+    const noResults = document.getElementById('noResults');
+    const guideCards = Array.from(document.querySelectorAll('.guide-card'));
+
+    function filterGuides() {
+        const searchTerm = searchInput.value.toLowerCase();
+
+        let filtered = guideCards.filter(card => {
+            const title = card.querySelector('.guide-title').textContent.toLowerCase();
+            return title.includes(searchTerm);
+        });
+
+        guidesGrid.innerHTML = '';
+        if (filtered.length === 0) {
+            guidesGrid.style.display = 'none';
+            noResults.style.display = 'block';
+        } else {
+            guidesGrid.style.display = 'grid';
+            noResults.style.display = 'none';
+            filtered.forEach(card => guidesGrid.appendChild(card));
+        }
+    }
+
+    searchInput.addEventListener('input', filterGuides);
+    filterGuides();  // Инициализация
+</script>
+{% endblock %}

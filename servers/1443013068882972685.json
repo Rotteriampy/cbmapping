@@ -1,0 +1,62 @@
+{
+  "info": {
+    "id": "1443013068882972685",
+    "name": "🍂 Ксантерия 🍂",
+    "member_count": 2,
+    "online_count": 1,
+    "description": "Нет описания",
+    "created_at": "25.11.2025",
+    "icon_url": "assets/1443013068882972685_icon.png",
+    "banner_url": null,
+    "owner_id": "1276979067333382247",
+    "premium_tier": 0,
+    "premium_subscription_count": 0,
+    "owner": "xant.gg",
+    "features": [],
+    "vanity_url": null
+  },
+  "history": [
+    {
+      "timestamp": 1767451750.8200443,
+      "member_count": 2,
+      "online_count": 1
+    },
+    {
+      "timestamp": 1767451750.8466685,
+      "member_count": 2,
+      "online_count": 1
+    }
+  ],
+  "members": [
+    {
+      "id": "1276979067333382247",
+      "name": "Ксант",
+      "bot": false,
+      "status": "offline",
+      "joined_at": 1764111525.607
+    },
+    {
+      "id": "1436689286920671284",
+      "name": "MapStats",
+      "bot": true,
+      "status": "online",
+      "joined_at": 1764986396.074
+    }
+  ],
+  "member_overlaps": {
+    "1263547717326606479": {
+      "server_name": "DEGRAMAP | Готовимся к Зиме!",
+      "common_count": 1,
+      "common_member_ids": [
+        "1276979067333382247"
+      ]
+    },
+    "1272874009385631766": {
+      "server_name": "🇷🇺 MAP | cbmapping.ru",
+      "common_count": 1,
+      "common_member_ids": [
+        "1276979067333382247"
+      ]
+    }
+  }
+}

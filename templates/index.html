@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}CBMapping.ru{% endblock %}
+
+{% block content %}
+<!-- Новый общий контейнер для заголовка + статистики -->
+<div class="hero-section">
+    <div class="main-name">
+        <h1>CBMapping.ru</h1>
+        <p>Сайт со всей собранной аналитикой и информацией о КБМаппинге</p>
+    </div>
+
+    <div class="main-stats">
+        <div class="stat-card">
+            <h2 class="number">{{ total_servers|default(1) }}</h2>
+            <p class="label">Серверов</p>
+        </div>
+        <div class="stat-card">
+            <h2 class="number">{{ total_members|default(348) }}</h2>
+            <p class="label">Всего участников</p>
+        </div>
+        <div class="stat-card">
+            <h2 class="number">{{ unique_count|default(348) }}</h2>
+            <p class="label">Уникальных участников</p>
+        </div>
+    </div>
+</div>
+<!-- Отдельный блок для событий -->
+<section class="events-section">
+    <h2 class="section-title">События</h2>
+    <div class="events-grid">
+        <p class="events-none">Здесь будут актуальные события из мира маппинга</p>
+        <!-- <div class="event-card">
+            <div class="event-content">
+                <h3>Новогодний стрим</h3>
+                <p>Поздравления, вопросы, игры, общение</p>
+                <div class="event-date">31 декабря - 1 января</div>
+            </div>
+            <a href="https://www.youtube.com/live/U4cpQGu_Ktw" class="event-link">Подключиться</a>
+        </div> -->
+    </div>
+</section>
+{% endblock %}

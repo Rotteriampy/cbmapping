@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}{{ item_name }}{% endblock %}
+
+{% block content %}
+<div class="wiki-detail-page">
+    <h1 class="page-title">{{ item_name }}</h1>
+
+    <div class="detail-main-content">
+        <div class="main-info-block">
+            <div class="description-card">
+                <div class="wiki-description">
+                    {{ item_description_safe | safe }}
+                </div>
+            </div>
+        </div>
+
+        <div class="data-table-container">
+            <div class="table-card">
+                <table class="detail-table">
+                    <tbody>
+                        {{ item_fields_html | safe }}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    {{ avatar_gallery_html | safe }}
+</div>
+
+<!-- Модальное окно для галереи -->
+<div id="imageModal" class="modal">
+    <span class="close-btn">&times;</span>
+    <img id="modalImage" class="modal-content">
+</div>
+
+<script>
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    const closeBtn = document.querySelector('.close-btn');
+
+    document.querySelectorAll('.clickable-avatar').forEach(item => {
+        item.addEventListener('click', () => {
+            modal.style.display = "block";
+            modalImg.src = item.dataset.src;
+        });
+    });
+
+    closeBtn.onclick = () => modal.style.display = "none";
+    window.onclick = (e) => { if (e.target === modal) modal.style.display = "none"; }
+</script>
+{% endblock %}

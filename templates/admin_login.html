@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ-панель - Вход</title>
+    <link rel="stylesheet" href="/admin_static/admin_panel.css">
+    <link rel="icon" href="/icons/favicon.ico" type="image/x-icon">
+</head>
+<body class="admin-container">
+
+    <!-- Заголовок как у админки -->
+    <header class="admin-header">
+        <h1>🔐 Админ-панель</h1>
+        <p>Введите пароль для доступа</p>
+    </header>
+
+    <main class="admin-content" style="display:flex; justify-content:center; align-items:center; min-height:calc(100vh - 100px);">
+        <div class="section-card" style="max-width:400px; width:100%;">
+            
+            <!-- Сообщения об ошибках -->
+            {% with messages = get_flashed_messages(category_filter=['error']) %}
+                {% if messages %}
+                    <div class="alert alert-error">
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            <form method="POST" style="display:flex; flex-direction:column; gap:15px;">
+                <div class="form-group">
+                    <label for="password">Пароль</label>
+                    <input type="password" id="password" name="password" required placeholder="Введите пароль" autofocus>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">
+                    Войти
+                </button>
+            </form>
+
+        </div>
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% block title %}Материалы{% endblock %}
+
+{% block content %}
+<div class="materials-page">
+    <div class="page-header">
+        <h2>Материалы</h2>
+    </div>
+
+    <div class="controls">
+        <input type="text" id="searchInput" class="search-input" placeholder="🔍 Поиск по названию...">
+        
+        <div class="tags-filter">
+            <span>Категории:</span>
+            <div id="tagsContainer">
+                {% for tag in tags %}
+                {% if tag != 'Все' %}
+                <div class="tag-item">
+                    <input type="checkbox" id="tag-{{ loop.index }}" value="{{ tag }}">
+                    <label for="tag-{{ loop.index }}" class="tag-label">{{ tag }}</label>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="materials-grid" id="materialsGrid">
+        {% for mat in materials %}
+        <div class="material-card clickable-card" 
+             data-title="{{ mat.title|lower }}" 
+             data-tag="{{ mat.tag|lower }}"
+             data-src="{{ mat.preview_url }}">
+            <img src="{{ mat.preview_url }}" alt="{{ mat.title }}" class="material-preview">
+            <div class="material-info">
+                <h2 class="material-title">{{ mat.title }}</h2>
+                <div class="material-tag-single">{{ mat.tag }}</div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div id="noResults" class="no-results">
+        <h3>Ничего не найдено</h3>
+        <p>Попробуйте изменить поиск или снять фильтры</p>
+    </div>
+</div>
+
+<!-- Модальное окно для увеличения изображения -->
+<div id="imageModal" class="modal">
+    <span class="close-btn">&times;</span>
+    <img id="modalImage" class="modal-content" alt="Увеличенное изображение">
+    <div id="modalCaption"></div>
+</div>
+
+<script>
+    const searchInput = document.getElementById('searchInput');
+    const tagsContainer = document.getElementById('tagsContainer');
+    const materialsGrid = document.getElementById('materialsGrid');
+    const noResults = document.getElementById('noResults');
+    const materialCards = Array.from(document.querySelectorAll('.material-card'));
+
+    // Модальное окно
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    const captionText = document.getElementById('modalCaption');
+    const closeBtn = document.querySelector('.close-btn');
+
+    // Клик по карточке — открываем модалку
+    materialsGrid.addEventListener('click', (e) => {
+        const card = e.target.closest('.clickable-card');
+        if (card && card.dataset.src) {
+            modal.style.display = "block";
+            modalImg.src = card.dataset.src;
+            captionText.textContent = card.querySelector('.material-title').textContent;
+        }
+    });
+
+    // Закрытие модалки
+    closeBtn.onclick = () => modal.style.display = "none";
+    window.onclick = (e) => {
+        if (e.target === modal) modal.style.display = "none";
+    };
+
+    function getActiveTags() {
+        return Array.from(tagsContainer.querySelectorAll('input:checked'))
+            .map(inp => inp.value.toLowerCase());
+    }
+
+    function filterMaterials() {
+        const searchTerm = searchInput.value.toLowerCase();
+        const activeTags = getActiveTags();
+
+        let hasVisible = false;
+
+        materialCards.forEach(card => {
+            const title = card.dataset.title || '';
+            const tag = card.dataset.tag || '';
+
+            const matchesSearch = title.includes(searchTerm);
+            const matchesTags = activeTags.length === 0 || activeTags.includes(tag);
+
+            if (matchesSearch && matchesTags) {
+                card.style.display = '';
+                hasVisible = true;
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        noResults.style.display = hasVisible ? 'none' : 'block';
+    }
+
+    searchInput.addEventListener('input', filterMaterials);
+    tagsContainer.addEventListener('change', filterMaterials);
+
+    filterMaterials();
+</script>
+{% endblock %}

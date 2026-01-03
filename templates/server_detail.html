@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}{{ info.name|default('Сервер') }} — MapStats{% endblock %}
+
+{% block content %}
+<div class="server-detail-page">
+    <div class="page-header">
+        <h2 class="page-title2">
+            {% if info.icon_url %}
+            <img src="/servers/assets/{{ guild_id }}_icon.png" 
+            alt="Icon" 
+            class="server-page-icon" 
+            onerror="this.style.display='none'">
+            {% endif %}
+            {{ info.name|default('Unknown Server') }}
+        </h2>
+    </div>
+
+    <div class="server-grid">
+        <!-- Основная информация -->
+        <div class="info-card">
+            <h2>📊 Основная информация</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <strong>Участников:</strong> {{ info.member_count|default(0) }}
+                </div>
+                <div class="info-item">
+                    <strong>Онлайн:</strong> {{ info.online_count|default(0) }}
+                </div>
+                <div class="info-item">
+                    <strong>ID:</strong> {{ guild_id }}
+                </div>
+                {% if info.premium_subscription_count > 0 %}
+                <div class="info-item">
+                    <strong>🚀 Бустов:</strong> {{ info.premium_subscription_count }} (Уровень {{ info.premium_tier }})
+                </div>
+                {% endif %}
+                {% if info.invite_link %}
+                <div class="info-item">
+                    <a href="{{ info.invite_link }}" target="_blank" class="invite-link">🔗 Присоединиться</a>
+                </div>
+                {% endif %}
+            </div>
+            {% if info.description %}
+            <div class="server-description">
+                <strong>Описание:</strong>
+                <p>{{ info.description }}</p>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Пересечения -->
+        {% if server.member_overlaps %}
+        <div class="info-card">
+            <h2>🔗 Пересечения с другими серверами</h2>
+            <div class="overlaps-list">
+                {% for other_id, overlap in server.member_overlaps.items() %}
+                <div class="overlap-item">
+                    <strong><a href="/server/{{ other_id }}">{{ overlap.server_name }}</a></strong>
+                    — {{ overlap.common_count }} общих участников
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
