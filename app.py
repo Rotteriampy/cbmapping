@@ -105,6 +105,27 @@ def sitemap():
     return response
 
 
+def generate_server_slug(name, guild_id):
+    """Генерирует slug из названия. Если не уникально — возвращает ID"""
+    if not name:
+        return str(guild_id)
+
+    # Транслит + безопасные символы
+    slug = re.sub(r"[^a-z0-9\-_]", "-", name.lower())
+    slug = re.sub(r"-+", "-", slug).strip("-")
+
+    if not slug:
+        return str(guild_id)
+
+    # Если slug свободен — используем его
+    if slug not in server_slug_cache:
+        server_slug_cache[slug] = guild_id
+        return slug
+    else:
+        # Если занят — fallback на ID
+        return str(guild_id)
+
+
 # Путь к папке с данными серверов (JSON)
 SERVERS_DATA_DIR = os.path.join(app.root_path, "servers")
 
@@ -442,27 +463,6 @@ def servers():
 
 # Кэш для slug → guild_id (чтобы быстро находить по названию)
 server_slug_cache = {}
-
-
-def generate_server_slug(name, guild_id):
-    """Генерирует slug из названия. Если не уникально — возвращает ID"""
-    if not name:
-        return str(guild_id)
-
-    # Транслит + безопасные символы
-    slug = re.sub(r"[^a-z0-9\-_]", "-", name.lower())
-    slug = re.sub(r"-+", "-", slug).strip("-")
-
-    if not slug:
-        return str(guild_id)
-
-    # Если slug свободен — используем его
-    if slug not in server_slug_cache:
-        server_slug_cache[slug] = guild_id
-        return slug
-    else:
-        # Если занят — fallback на ID
-        return str(guild_id)
 
 
 @app.route("/server/<slug>")
@@ -820,4 +820,4 @@ def admin_static_files(filename):
 
 if __name__ == "__main__":
     print("🌐 Запускаю Flask-сайт на http://0.0.0.0:5000")
-    app.run(host="127.0.0.1", port=5000, debug=False)
+    app.run(host="0.0.0.0", port=5000, debug=False)
