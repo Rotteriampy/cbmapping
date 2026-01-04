@@ -17,12 +17,12 @@
   },
   "history": [
     {
-      "timestamp": 1767451750.8200443,
+      "timestamp": 1767548560.77292,
       "member_count": 2,
       "online_count": 1
     },
     {
-      "timestamp": 1767451750.8466685,
+      "timestamp": 1767548560.7963033,
       "member_count": 2,
       "online_count": 1
     }
@@ -52,7 +52,7 @@
       ]
     },
     "1272874009385631766": {
-      "server_name": "🇷🇺 MAP | cbmapping.ru",
+      "server_name": "MAP | cbmapping.ru",
       "common_count": 1,
       "common_member_ids": [
         "1276979067333382247"
